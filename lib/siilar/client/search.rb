@@ -9,7 +9,7 @@ module Siilar
         options = { query: query }
         response = client.get('1.0/search', options)
 
-        response.map { |r| Struct::SearchResult.new(r) }
+        response.map { |r| Struct::Track.new(r) }
       end
     end
   end

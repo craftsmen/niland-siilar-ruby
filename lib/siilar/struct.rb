@@ -15,4 +15,3 @@ end
 require 'siilar/struct/track'
 require 'siilar/struct/album'
 require 'siilar/struct/artist'
-require 'siilar/struct/search_result'

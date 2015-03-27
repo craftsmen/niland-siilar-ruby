@@ -21,7 +21,7 @@ describe Siilar::Client, '.search' do
       result = subject.search(attributes)
 
       expect(result).to be_a(Array)
-      expect(result.first.id).to be_a(Fixnum)
+      expect(result.first).to be_a(Siilar::Struct::Track)
       expect(result.first.album).to be_a(Siilar::Struct::Album)
       expect(result.first.artist).to be_a(Siilar::Struct::Artist)
     end
