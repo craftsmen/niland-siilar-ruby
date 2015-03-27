@@ -1,16 +1,12 @@
-# Siilar
+# Siilar Ruby Client
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/siilar`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A Ruby client for the [Siilar API](http://api.siilar.com/1.0/doc/).
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-```ruby
-gem 'siilar'
-```
+    gem 'siilar'
 
 And then execute:
 
@@ -22,7 +18,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This library is a Ruby client you can use to interact with the [Siilar API](http://api.siilar.com/1.0/doc/).
+
+Here's a short example.
+
+```ruby
+require 'siilar'
+
+client = Siilar::Client.new(api_key: 'YOUR_KEY')
+
+# Create a track
+track = client.tracks.create(title: 'Nine Lives', external_id: '123')
+puts "Track: %s (id: %d)" % [track.title, track.id]
+```
 
 ## Development
 
@@ -32,7 +40,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/siilar/fork )
+1. Fork it ( https://github.com/craftsmen/niland-siilar-ruby/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
