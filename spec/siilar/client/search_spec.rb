@@ -5,12 +5,12 @@ describe Siilar::Client, '.search' do
 
   describe '#search' do
     before do
-      stub_request(:get, %r[/1.0/search]).to_return(read_fixture('search/list/success.http'))
+      stub_request(:get, %r[/1.0/search]).to_return(read_fixture('search/similar/success.http'))
     end
 
     it 'builds the correct request' do
       attributes = { similar_tracks: '1234' }
-      subject.search(attributes)
+      subject.similar(attributes)
 
       expect(WebMock).to have_requested(:get, 'http://api.siilar/1.0/search?similar_tracks=1234&key=key')
                           .with(query: attributes)
@@ -18,7 +18,7 @@ describe Siilar::Client, '.search' do
 
     it 'returns the search results' do
       attributes = { similar_tracks: '1234' }
-      result = subject.search(attributes)
+      result = subject.similar(attributes)
 
       expect(result).to be_a(Array)
       expect(result.first).to be_a(Siilar::Struct::Track)

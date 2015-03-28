@@ -30,6 +30,12 @@ client = Siilar::Client.new(api_key: 'YOUR_KEY')
 # Create a track
 track = client.tracks.create(title: 'Nine Lives', external_id: '123')
 puts "Track: %s (id: %d)" % [track.title, track.id]
+
+# Search for similar tracks
+tracks = client.search.similar(similar_ids: '1234')
+tracks.each do |track|
+  puts "Track: %s (id: %d)" % [track.title, track.id]
+end
 ```
 
 ## Development

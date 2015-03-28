@@ -5,7 +5,7 @@ module Siilar
       # Search for a track
       #
       # @see http://api.siilar.com/1.0/doc/search-and-analyze#search
-      def search(query = {})
+      def similar(query = {})
         options = { query: query }
         response = client.get('1.0/search', options)
 
