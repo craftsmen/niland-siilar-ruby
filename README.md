@@ -1,4 +1,4 @@
-# Siilar Ruby Client
+# Siilar Ruby Client [![Build Status](https://travis-ci.org/craftsmen/niland-siilar-ruby.svg?branch=better-methods-names)](https://travis-ci.org/craftsmen/niland-siilar-ruby)
 
 A Ruby client for the [Siilar API](http://api.siilar.com/1.0/doc/).
 
