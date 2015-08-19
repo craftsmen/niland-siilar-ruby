@@ -4,7 +4,7 @@ require 'siilar/client/clients'
 
 module Siilar
   class Client
-    attr_accessor :api_endpoint, :api_key, :user_agent
+    attr_accessor :api_endpoint, :api_key, :user_agent, :requests_timeout
 
     def initialize(options = {})
       defaults = Siilar::Default.options
@@ -55,7 +55,6 @@ module Siilar
       if !data.empty?
         options[:body] = data.to_json
       end
-
       HTTParty.send(method, api_endpoint + path, Extra.deep_merge!(base_options, options))
     end
 
@@ -74,6 +73,10 @@ module Siilar
           'User-Agent' => user_agent
         }
       }
+
+      if requests_timeout
+        options.merge!(timeout: requests_timeout)
+      end
 
       if api_key
         options.merge!(query: { key: api_key })
