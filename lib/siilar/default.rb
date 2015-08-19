@@ -5,7 +5,7 @@ module Siilar
 
     class << self
       def keys
-        @keys ||= [:api_endpoint, :api_key, :user_agent]
+        @keys ||= [:api_endpoint, :api_key, :user_agent, :requests_timeout]
       end
 
       def options
@@ -18,6 +18,10 @@ module Siilar
 
       def api_key
         ENV['SIILAR_API_KEY']
+      end
+
+      def requests_timeout
+        ENV['SIILAR_REQUESTS_TIMEOUT'] || 10
       end
 
       def user_agent

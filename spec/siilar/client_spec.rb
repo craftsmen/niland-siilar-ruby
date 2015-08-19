@@ -104,6 +104,7 @@ describe Siilar::Client do
             'Content-type' => 'application/json',
             'User-Agent' => "niland-siilar-ruby/#{Siilar::VERSION}"
           },
+          timeout: 10,
           query: { key: 'key' }
         ).and_return(double('response', code: 200))
 
@@ -121,6 +122,7 @@ describe Siilar::Client do
             'User-Agent' => "niland-siilar-ruby/#{Siilar::VERSION}",
             'Custom' => 'Header'
           },
+          timeout: 10,
           query: { key: 'key', foo: 'bar' },
           body: { something: 'else' }.to_json
         )
