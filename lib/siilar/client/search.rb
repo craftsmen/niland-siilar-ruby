@@ -21,6 +21,16 @@ module Siilar
 
         response.map { |r| Struct::Track.new(r) }
       end
+
+      # Search for similar tracks from query
+      #
+      # @see https://api.niland.io/1.0/doc/search-and-analyze#search-from-any
+      def similar_from_any(query = {})
+        options = { query: query }
+        response = client.get('1.0/search-from-any', options)
+
+        response.map { |r| Struct::Track.new(r) }
+      end
     end
   end
 end
