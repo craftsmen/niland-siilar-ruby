@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Server: nginx/1.4.6 (Ubuntu)
+Date: Thu, 26 Mar 2015 19:43:31 GMT
+Content-Type: application/json
+Content-Length: 183
+Connection: keep-alive
+X-Powered-By: PHP/5.5.9-1ubuntu4.5
+Cache-Control: private, must-revalidate
+X-Varnish: 5971782
+Age: 0
+Via: 1.1 varnish-v4
+Accept-Ranges: bytes
+
+{"artist":"Bob Marley & The Wailers","title":"Redemption Song","external_id":1151525,"image_url":"http:\/\/api.deezer.com\/album\/123374\/image","album":"Les 50 Plus Belles Chansons"}

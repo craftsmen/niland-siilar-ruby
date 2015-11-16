@@ -8,7 +8,16 @@ module Siilar
       def track(track)
         response = client.get("1.0/tracks/#{track}")
 
-        Struct::track.new(response)
+        Struct::Track.new(response)
+      end
+
+      # Gets a track from its external id.
+      #
+      # @see https://api.niland.io/doc/tracks#get-an-external-track
+      def external_track(track)
+        response = client.get("1.0/external-tracks/#{track}")
+
+        Struct::ExternalTrack.new(response)
       end
 
       # Creates a track.
