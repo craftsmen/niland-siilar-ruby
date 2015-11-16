@@ -45,6 +45,27 @@ describe Siilar::Client, '.tracks' do
     end
   end
 
+  describe '#from_external' do
+    before do
+      stub_request(:get, %r[/1.0/from-external]).to_return(read_fixture('tracks/from_external/success.http'))
+    end
+
+    it 'builds the correct request' do
+      track = 88988
+      subject.from_external(track)
+
+      expect(WebMock).to have_requested(:get, 'http://api.siilar/1.0/from-external/88988?key=key')
+    end
+
+    it 'returns the track' do
+      track = 88988
+      result = subject.from_external(track)
+
+      expect(result).to be_a(Siilar::Struct::Track)
+      expect(result.id).to be_a(Fixnum)
+    end
+  end
+
   describe '#create' do
     before do
       stub_request(:post, %r[/1.0/tracks]).to_return(read_fixture('tracks/create/created.http'))
