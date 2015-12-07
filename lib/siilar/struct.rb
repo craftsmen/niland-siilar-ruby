@@ -13,6 +13,7 @@ module Siilar
 end
 
 require 'siilar/struct/track'
+require 'siilar/struct/external_track'
 require 'siilar/struct/album'
 require 'siilar/struct/artist'
 require 'siilar/struct/tag'
