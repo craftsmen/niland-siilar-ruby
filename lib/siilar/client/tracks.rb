@@ -26,7 +26,7 @@ module Siilar
       def from_external(track)
         response = client.get("1.0/from-external/#{track}")
 
-        Struct::Track.new(response)
+        response.map { |r| Struct::Track.new(r) }
       end
 
       # Creates a track.
