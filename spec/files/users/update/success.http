@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Cache-Control: private, must-revalidate
+Connection: keep-alive
+Content-Length: 103
+Content-Type: application/json
+Date: Tue, 05 Jan 2016 14:35:51 GMT
+Server: nginx/1.4.6 (Ubuntu)
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+expires: -1
+pragma: no-cache
+
+{"external_id":"14","birthdate":"1991-12-04T00:00:00+0000","gender":"M","country":"France","city":null}
