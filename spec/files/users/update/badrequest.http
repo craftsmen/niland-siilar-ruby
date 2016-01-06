@@ -1,0 +1,12 @@
+HTTP/1.1 400 Bad Request
+Server: nginx/1.4.6 (Ubuntu)
+Date: Thu, 26 Mar 2015 21:04:11 GMT
+Content-Type: text/html; charset=UTF-8
+Content-Length: 37
+Connection: keep-alive
+X-Powered-By: PHP/5.5.9-1ubuntu4.5
+Cache-Control: private, must-revalidate
+pragma: no-cache
+expires: -1
+
+{"user":["This value is not valid."]}

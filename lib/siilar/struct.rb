@@ -12,9 +12,10 @@ module Siilar
   end
 end
 
-require 'siilar/struct/track'
-require 'siilar/struct/external_track'
 require 'siilar/struct/album'
 require 'siilar/struct/artist'
+require 'siilar/struct/external_track'
 require 'siilar/struct/tag'
 require 'siilar/struct/tag_collection'
+require 'siilar/struct/track'
+require 'siilar/struct/user'

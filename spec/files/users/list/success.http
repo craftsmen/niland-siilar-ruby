@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Access-Control-Allow-Origin: *
+Age: 0
+Cache-Control: private
+Connection: keep-alive
+Content-Length: 201
+Content-Type: application/json
+Date: Tue, 05 Jan 2016 14:34:11 GMT
+Server: nginx/1.4.6 (Ubuntu)
+Via: 1.1 varnish-v4
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+X-Varnish: 538132
+
+[{"external_id":"14","birthdate":"1991-12-04T00:00:00+0000","gender":"M","country":null,"city":null},{"external_id":"21","birthdate":"1992-03-21T00:00:00+0000","gender":"F","country":null,"city":null}]

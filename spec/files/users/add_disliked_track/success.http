@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Age: 0
+Cache-Control: private, must-revalidate
+Connection: keep-alive
+Content-Length: 222
+Content-Type: application/json
+Date: Tue, 05 Jan 2016 14:45:43 GMT
+Server: nginx/1.4.6 (Ubuntu)
+Via: 1.1 varnish-v4
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+X-Varnish: 5378829
+expires: -1
+pragma: no-cache
+
+{"id":187069,"hash":"16E5a170","title":"Dahoim isch Dahoim","popularity":null,"album":{"name":"Zsamma besser dran"},"artist":{"name":"So Semmer Halt"},"duration":602,"external_id":"88988","isrc":"DEE841425050","year":null}

@@ -13,6 +13,10 @@ module Siilar
       @services[:tags] ||= Client::TagsService.new(self)
     end
 
+    def users
+      @services[:users] ||= Client::UsersService.new(self)
+    end
+
     class ClientService < ::Struct.new(:client)
     end
 
@@ -32,6 +36,12 @@ module Siilar
 
     class TagsService < ClientService
       include Client::Tags
+    end
+
+    require 'siilar/client/users'
+
+    class UsersService < ClientService
+      include Client::Users
     end
   end
 end

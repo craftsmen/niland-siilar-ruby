@@ -1,0 +1,14 @@
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: *
+Age: 0
+Cache-Control: private, must-revalidate
+Connection: keep-alive
+Content-Type: text/html
+Date: Tue, 05 Jan 2016 14:39:04 GMT
+Server: nginx/1.4.6 (Ubuntu)
+Via: 1.1 varnish-v4
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+X-Varnish: 5104393
+expires: -1
+pragma: no-cache
+

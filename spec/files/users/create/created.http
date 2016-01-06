@@ -1,0 +1,16 @@
+HTTP/1.1 201 Created
+Access-Control-Allow-Origin: *
+Age: 0
+Cache-Control: private, must-revalidate
+Connection: keep-alive
+Content-Length: 99
+Content-Type: application/json
+Date: Tue, 05 Jan 2016 14:32:28 GMT
+Server: nginx/1.4.6 (Ubuntu)
+Via: 1.1 varnish-v4
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+X-Varnish: 538095
+expires: -1
+pragma: no-cache
+
+{"external_id":"21","birthdate":"1992-03-21T00:00:00+0000","gender":"F","country":null,"city":null}
