@@ -15,6 +15,7 @@ end
 require 'siilar/struct/album'
 require 'siilar/struct/artist'
 require 'siilar/struct/external_track'
+require 'siilar/struct/radio'
 require 'siilar/struct/tag'
 require 'siilar/struct/tag_collection'
 require 'siilar/struct/track'

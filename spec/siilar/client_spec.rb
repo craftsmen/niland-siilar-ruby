@@ -18,7 +18,7 @@ describe Siilar::Client do
     it 'defaults :api_endpoint to production API' do
       subject = described_class.new
 
-      expect(subject.api_endpoint).to eq('http://api.siilar.com/')
+      expect(subject.api_endpoint).to eq('https://api.niland.io/')
     end
   end
 
@@ -82,7 +82,7 @@ describe Siilar::Client do
       subject.request(:get, 'foo', {})
 
       expect(WebMock)
-        .to have_requested(:get, 'http://api.siilar.com/foo?key=key')
+        .to have_requested(:get, 'https://api.niland.io/foo?key=key')
         .with(
           headers: {
             'Accept' => 'application/json',

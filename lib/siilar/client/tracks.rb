@@ -4,7 +4,7 @@ module Siilar
 
       # Gets a track.
       #
-      # @see http://api.siilar.com/1.0/doc/tracks#get-a-track
+      # @see http://api.niland.io/1.0/doc/tracks#get-a-track
       def track(track)
         response = client.get("1.0/tracks/#{track}")
 
@@ -26,12 +26,12 @@ module Siilar
       def from_external(track)
         response = client.get("1.0/from-external/#{track}")
 
-        Struct::Track.new(response)
+        response.map { |r| Struct::Track.new(r) }
       end
 
       # Creates a track.
       #
-      # @see http://api.siilar.com/1.0/doc/tracks#create-a-track
+      # @see http://api.niland.io/1.0/doc/tracks#create-a-track
       def create(attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:title, :external_id])
         response = client.post('1.0/tracks', attributes)
@@ -41,7 +41,7 @@ module Siilar
 
       # Updates a track.
       #
-      # @see http://api.siilar.com/1.0/doc/tracks#edit-a-track
+      # @see http://api.niland.io/1.0/doc/tracks#edit-a-track
       def update(track, attributes = {})
         response = client.patch("1.0/tracks/#{track}", attributes)
 
@@ -50,7 +50,7 @@ module Siilar
 
       # Deletes a track.
       #
-      # @see http://api.siilar.com/1.0/doc/tracks#delete-a-track
+      # @see http://api.niland.io/1.0/doc/tracks#delete-a-track
       def delete(track)
         client.delete("1.0/tracks/#{track}")
       end

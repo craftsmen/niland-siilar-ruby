@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Siilar::Client, '.tracks' do
-  subject { described_class.new(api_endpoint: 'http://api.siilar', api_key: 'key').tracks }
+  subject { described_class.new(api_endpoint: 'http://api.niland', api_key: 'key').tracks }
 
   describe '#track' do
     before do
@@ -12,7 +12,7 @@ describe Siilar::Client, '.tracks' do
       track = 187069
       subject.track(track)
 
-      expect(WebMock).to have_requested(:get, 'http://api.siilar/1.0/tracks/187069?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland/1.0/tracks/187069?key=key')
     end
 
     it 'returns the track' do
@@ -33,7 +33,7 @@ describe Siilar::Client, '.tracks' do
       track = 1151525
       subject.external_track(track)
 
-      expect(WebMock).to have_requested(:get, 'http://api.siilar/1.0/external-tracks/1151525?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland/1.0/external-tracks/1151525?key=key')
     end
 
     it 'returns the track' do
@@ -54,15 +54,16 @@ describe Siilar::Client, '.tracks' do
       track = 88988
       subject.from_external(track)
 
-      expect(WebMock).to have_requested(:get, 'http://api.siilar/1.0/from-external/88988?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland/1.0/from-external/88988?key=key')
     end
 
     it 'returns the track' do
       track = 88988
       result = subject.from_external(track)
 
-      expect(result).to be_a(Siilar::Struct::Track)
-      expect(result.id).to be_a(Fixnum)
+      expect(result).to be_an(Array)
+      expect(result.first).to be_a(Siilar::Struct::Track)
+      expect(result.first.id).to be_a(Fixnum)
     end
   end
 
@@ -75,7 +76,7 @@ describe Siilar::Client, '.tracks' do
       attributes = { title: 'Nine Lives', external_id: '1234' }
       subject.create(attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.siilar/1.0/tracks?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland/1.0/tracks?key=key')
                           .with(body: attributes)
     end
 
@@ -96,7 +97,7 @@ describe Siilar::Client, '.tracks' do
     it 'builds the correct request' do
       subject.update(1, { title: 'Updated' })
 
-      expect(WebMock).to have_requested(:patch, 'http://api.siilar/1.0/tracks/1?key=key')
+      expect(WebMock).to have_requested(:patch, 'http://api.niland/1.0/tracks/1?key=key')
                           .with(body: { title: 'Updated' })
     end
 
@@ -124,7 +125,7 @@ describe Siilar::Client, '.tracks' do
     it 'builds the correct request' do
       subject.delete(1)
 
-      expect(WebMock).to have_requested(:delete, 'http://api.siilar/1.0/tracks/1?key=key')
+      expect(WebMock).to have_requested(:delete, 'http://api.niland/1.0/tracks/1?key=key')
     end
 
     it 'returns nothing' do

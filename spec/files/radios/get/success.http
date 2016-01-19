@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Access-Control-Allow-Origin: *
+Age: 0
+Cache-Control: private
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 05 Jan 2016 12:53:10 GMT
+Server: nginx/1.4.6 (Ubuntu)
+Via: 1.1 varnish-v4
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+X-Varnish: 5160398
+transfer-encoding: chunked
+
+{"id":"568bbb8be13aa0e8878b4567","current_tracks":[],"seeds":[{"id":104428,"hash":"2b5CB943","title":"Come Closer","popularity":null,"album":{"name":"Pizza"},"artist":{"name":"Treefight For Sunlight"},"duration":223,"external_id":"5361","isrc":"DKPF51400307","year":null}],"tags":[],"user":{"external_id":"14","birthdate":"1991-12-04T00:00:00+0000","gender":"M","country":null,"city":null}}
