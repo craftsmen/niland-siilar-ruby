@@ -1,6 +1,6 @@
 module Siilar
   module Default
-    API_ENDPOINT = "http://api.siilar.com/".freeze
+    API_ENDPOINT = "https://api.niland.io/".freeze
     USER_AGENT = "niland-siilar-ruby/#{VERSION}".freeze
 
     class << self

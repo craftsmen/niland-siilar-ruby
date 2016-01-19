@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Siilar::Client, '.search' do
-  subject { described_class.new(api_endpoint: 'http://api.siilar', api_key: 'key').search }
+  subject { described_class.new(api_endpoint: 'http://api.niland', api_key: 'key').search }
 
   describe '#similar' do
     before do
@@ -12,7 +12,7 @@ describe Siilar::Client, '.search' do
       attributes = { similar_tracks: '1234' }
       subject.similar(attributes)
 
-      expect(WebMock).to have_requested(:get, 'http://api.siilar/1.0/search?similar_tracks=1234&key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland/1.0/search?similar_tracks=1234&key=key')
                           .with(query: attributes)
     end
 
@@ -36,7 +36,7 @@ describe Siilar::Client, '.search' do
       attributes = { similar_tracks: '1234' }
       subject.similar_from_external(attributes)
 
-      expect(WebMock).to have_requested(:get, 'http://api.siilar/1.0/search-from-external?similar_tracks=1234&key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland/1.0/search-from-external?similar_tracks=1234&key=key')
                           .with(query: attributes)
     end
 
@@ -60,7 +60,7 @@ describe Siilar::Client, '.search' do
       attributes = { query: 'radiohead' }
       subject.similar_from_any(attributes)
 
-      expect(WebMock).to have_requested(:get, 'http://api.siilar/1.0/search-from-any?query=radiohead&key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland/1.0/search-from-any?query=radiohead&key=key')
                           .with(query: attributes)
     end
 

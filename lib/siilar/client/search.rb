@@ -4,7 +4,7 @@ module Siilar
 
       # Search for a track
       #
-      # @see http://api.siilar.com/1.0/doc/search-and-analyze#search
+      # @see http://api.niland.io/1.0/doc/search-and-analyze#search
       def similar(query = {})
         options = { query: query }
         response = client.get('1.0/search', options)
@@ -14,7 +14,7 @@ module Siilar
 
       # Search for a track from external ids
       #
-      # @see http://api.siilar.com/1.0/doc/search-and-analyze#search-from-external
+      # @see http://api.niland.io/1.0/doc/search-and-analyze#search-from-external
       def similar_from_external(query = {})
         options = { query: query }
         response = client.get('1.0/search-from-external', options)

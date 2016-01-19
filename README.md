@@ -1,6 +1,6 @@
 # Siilar Ruby Client [![Build Status](https://travis-ci.org/craftsmen/niland-siilar-ruby.svg?branch=better-methods-names)](https://travis-ci.org/craftsmen/niland-siilar-ruby)
 
-A Ruby client for the [Siilar API](http://api.siilar.com/1.0/doc/).
+A Ruby client for the [Siilar API](http://api.niland.io/1.0/doc/).
 
 ## Installation
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-This library is a Ruby client you can use to interact with the [Siilar API](http://api.siilar.com/1.0/doc/).
+This library is a Ruby client you can use to interact with the [Siilar API](http://api.niland.io/1.0/doc/).
 
 Here's a short example.
 

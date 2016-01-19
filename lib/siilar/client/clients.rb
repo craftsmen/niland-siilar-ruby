@@ -1,8 +1,8 @@
 module Siilar
   class Client
 
-    def tracks
-      @services[:tracks] ||= Client::TracksService.new(self)
+    def radios
+      @services[:radios] ||= Client::RadiosService.new(self)
     end
 
     def search
@@ -11,6 +11,10 @@ module Siilar
 
     def tags
       @services[:tags] ||= Client::TagsService.new(self)
+    end
+
+    def tracks
+      @services[:tracks] ||= Client::TracksService.new(self)
     end
 
     def users
@@ -42,6 +46,12 @@ module Siilar
 
     class UsersService < ClientService
       include Client::Users
+    end
+
+    require 'siilar/client/radios'
+
+    class RadiosService < ClientService
+      include Client::Radios
     end
   end
 end

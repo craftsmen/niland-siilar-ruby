@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Siilar::Client, '.tags' do
-  subject { described_class.new(api_endpoint: 'http://api.siilar', api_key: 'key').tags }
+  subject { described_class.new(api_endpoint: 'http://api.niland', api_key: 'key').tags }
 
   describe '#create_tag_collection' do
     before do
@@ -12,7 +12,7 @@ describe Siilar::Client, '.tags' do
       attributes = { name: 'Niland Moods', description: 'Niland Moods' }
       subject.create_tag_collection(attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.siilar/1.0/tag-collections?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland/1.0/tag-collections?key=key')
                           .with(body: attributes)
     end
 
@@ -34,7 +34,7 @@ describe Siilar::Client, '.tags' do
     it 'builds the correct request' do
       subject.edit_tag_collection("54d823e858172f11df4919d8", { name: 'Updated' })
 
-      expect(WebMock).to have_requested(:patch, 'http://api.siilar/1.0/tag-collections/54d823e858172f11df4919d8?key=key')
+      expect(WebMock).to have_requested(:patch, 'http://api.niland/1.0/tag-collections/54d823e858172f11df4919d8?key=key')
                           .with(body: { name: 'Updated' })
     end
 
@@ -63,7 +63,7 @@ describe Siilar::Client, '.tags' do
     it 'builds the correct request' do
       subject.delete_tag_collection("54d823e858172f11df4919d8")
 
-      expect(WebMock).to have_requested(:delete, 'http://api.siilar/1.0/tag-collections/54d823e858172f11df4919d8?key=key')
+      expect(WebMock).to have_requested(:delete, 'http://api.niland/1.0/tag-collections/54d823e858172f11df4919d8?key=key')
     end
 
     it 'returns nothing' do
