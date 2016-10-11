@@ -5,14 +5,14 @@ describe Siilar::Client, '.tags' do
 
   describe '#create_tag_collection' do
     before do
-      stub_request(:post, %r[/1.0/tag-collections]).to_return(read_fixture('tags/create/created.http'))
+      stub_request(:post, %r[/2.0/tag-collections]).to_return(read_fixture('tags/create/created.http'))
     end
 
     it 'builds the correct request' do
       attributes = { name: 'Niland Moods', description: 'Niland Moods' }
       subject.create_tag_collection(attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.niland/1.0/tag-collections?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/tag-collections?key=key')
                           .with(body: attributes)
     end
 
@@ -28,13 +28,13 @@ describe Siilar::Client, '.tags' do
 
   describe '#edit_tag_collection' do
     before do
-      stub_request(:patch, %r[/1.0/tag-collections/54d823e858172f11df4919d8]).to_return(read_fixture('tags/update/success.http'))
+      stub_request(:patch, %r[/2.0/tag-collections/54d823e858172f11df4919d8]).to_return(read_fixture('tags/update/success.http'))
     end
 
     it 'builds the correct request' do
       subject.edit_tag_collection("54d823e858172f11df4919d8", { name: 'Updated' })
 
-      expect(WebMock).to have_requested(:patch, 'http://api.niland/1.0/tag-collections/54d823e858172f11df4919d8?key=key')
+      expect(WebMock).to have_requested(:patch, 'http://api.niland/2.0/tag-collections/54d823e858172f11df4919d8?key=key')
                           .with(body: { name: 'Updated' })
     end
 
@@ -48,7 +48,7 @@ describe Siilar::Client, '.tags' do
 
     context 'when something does not exist' do
       it 'raises NotFoundError' do
-        stub_request(:patch, %r[/1.0]).to_return(read_fixture('tags/notfound.http'))
+        stub_request(:patch, %r[/2.0]).to_return(read_fixture('tags/notfound.http'))
 
         expect { subject.edit_tag_collection("54d823e858172f11df4919d8", {}) }.to raise_error(Siilar::NotFoundError)
       end
@@ -57,13 +57,13 @@ describe Siilar::Client, '.tags' do
 
   describe '#delete_tag_collection' do
     before do
-      stub_request(:delete, %r[/1.0/tag-collections/54d823e858172f11df4919d8]).to_return(read_fixture("tags/delete/success.http"))
+      stub_request(:delete, %r[/2.0/tag-collections/54d823e858172f11df4919d8]).to_return(read_fixture("tags/delete/success.http"))
     end
 
     it 'builds the correct request' do
       subject.delete_tag_collection("54d823e858172f11df4919d8")
 
-      expect(WebMock).to have_requested(:delete, 'http://api.niland/1.0/tag-collections/54d823e858172f11df4919d8?key=key')
+      expect(WebMock).to have_requested(:delete, 'http://api.niland/2.0/tag-collections/54d823e858172f11df4919d8?key=key')
     end
 
     it 'returns nothing' do
@@ -73,7 +73,7 @@ describe Siilar::Client, '.tags' do
     end
 
     it 'supports HTTP 204' do
-      stub_request(:delete, %r[/1.0/tag-collections/54d823e858172f11df4919d8]).to_return(read_fixture('tags/delete/success-204.http'))
+      stub_request(:delete, %r[/2.0/tag-collections/54d823e858172f11df4919d8]).to_return(read_fixture('tags/delete/success-204.http'))
 
       result = subject.delete_tag_collection("54d823e858172f11df4919d8")
 
@@ -82,7 +82,7 @@ describe Siilar::Client, '.tags' do
 
     context 'when something does not exist' do
       it 'raises NotFoundError' do
-        stub_request(:delete, %r[/1.0/tag-collections/54d823e858172f11df4919d8]).to_return(read_fixture('tags/notfound.http'))
+        stub_request(:delete, %r[/2.0/tag-collections/54d823e858172f11df4919d8]).to_return(read_fixture('tags/notfound.http'))
 
         expect { subject.delete_tag_collection("54d823e858172f11df4919d8") }.to raise_error(Siilar::NotFoundError)
       end

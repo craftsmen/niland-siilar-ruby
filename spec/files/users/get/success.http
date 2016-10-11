@@ -12,4 +12,4 @@ Via: 1.1 varnish-v4
 X-Powered-By: PHP/5.5.9-1ubuntu4.14
 X-Varnish: 5225033
 
-{"external_id":"14","birthdate":"1991-12-04T00:00:00+0000","gender":"M","country":"France","city":null}
+{"reference":"14","birthdate":"1991-12-04T00:00:00+0000","gender":"M","country":"France","city":null}

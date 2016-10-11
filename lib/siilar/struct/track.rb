@@ -2,7 +2,7 @@ module Siilar
   module Struct
 
     class Track < Base
-      attr_accessor :id, :hash, :title, :popularity, :duration, :external_id, :isrc, :year
+      attr_accessor :id, :title, :popularity, :duration, :reference, :isrc, :year, :created_at, :tags
 
       def album
         @album ||= {}

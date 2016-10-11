@@ -4,84 +4,76 @@ module Siilar
 
       # Get a list of your users.
       #
-      # @see http://api.niland.io/1.0/doc/users#list-users
+      # @see http://api.niland.io/2.0/doc/users#list-users
       def list(query = {})
-        response = client.get('1.0/users')
-        response.map { |user| Struct::User.new(user) }
+        response = client.get('2.0/users')
+        response['data'].map { |user| Struct::User.new(user) }
       end
 
       # Get a user.
       #
-      # @see http://api.niland.io/1.0/doc/users#get-a-user
+      # @see http://api.niland.io/2.0/doc/users#get-a-user
       def get(user)
-        response = client.get("1.0/users/#{user}")
+        response = client.get("2.0/users/#{user}")
         Struct::User.new(response)
       end
 
       # Create a user.
       #
-      # @see http://api.niland.io/1.0/doc/users#create-a-user
+      # @see http://api.niland.io/2.0/doc/users#create-a-user
       def create(attributes = {})
-        Extra.validate_mandatory_attributes(attributes, [:external_id])
-        response = client.post('1.0/users', attributes)
+        Extra.validate_mandatory_attributes(attributes, [:reference])
+        response = client.post('2.0/users', attributes)
         Struct::User.new(response)
       end
 
       # Update a user.
       #
-      # @see http://api.niland.io/1.0/doc/users#update-a-user
+      # @see http://api.niland.io/2.0/doc/users#edit-a-user
       def update(user, attributes = {})
-        response = client.patch("1.0/users/#{user}", attributes)
+        response = client.patch("2.0/users/#{user}", attributes)
         Struct::User.new(response)
       end
 
       # Delete a user.
       #
-      # @see http://api.niland.io/1.0/doc/users#delete-a-user
+      # @see http://api.niland.io/2.0/doc/users#delete-a-user
       def delete(user)
-        client.delete("1.0/users/#{user}")
+        client.delete("2.0/users/#{user}")
       end
 
-      # Get next user tracks
+      # Get user likes
       #
-      # @see http://api.niland.io/1.0/doc/users#get-next-user-tracks
-      def get_next(user)
-        response = client.get("1.0/users/#{user}/next")
-        response.map { |user| Struct::User.new(response) }
+      # @see http://api.niland.io/2.0/doc/users#get-user-likes
+      def get_likes(user)
+        response = client.get("2.0/users/#{user}/likes")
+        response['data'].map { |track| Struct::Track.new(track) }
       end
 
-      # Get liked tracks.
+      # Add a user like.
       #
-      # @see https://api.niland.io/doc/users#get-liked-tracks
-      def get_liked_tracks(user)
-        response = client.get("1.0/users/#{user}/likes")
-        response.map { |track| Struct::Track.new(track) }
-      end
-
-      # Add liked tracks.
-      #
-      # @see https://api.niland.io/doc/users#add-liked-track
-      def add_liked_track(user, attributes = {})
+      # @see https://api.niland.io/doc/users#add-a-user-like
+      def add_like(user, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("1.0/users/#{user}/likes", attributes)
-        Struct::Track.new(response)
+        response = client.post("2.0/users/#{user}/likes", attributes)
+        Struct::Track.new(response['track'])
       end
 
-      # Get disliked tracks.
+      # Get user dislikes
       #
-      # @see https://api.niland.io/doc/users#get-disliked-tracks
-      def get_disliked_tracks(user)
-        response = client.get("1.0/users/#{user}/dislikes")
-        response.map { |track| Struct::Track.new(track) }
+      # @see http://api.niland.io/2.0/doc/users#get-user-dislikes
+      def get_dislikes(user)
+        response = client.get("2.0/users/#{user}/dislikes")
+        response['data'].map { |track| Struct::Track.new(track) }
       end
 
-      # Add disliked tracks.
+      # Add a user dislike.
       #
-      # @see https://api.niland.io/doc/users#add-disliked-track
-      def add_disliked_track(user, attributes = {})
+      # @see https://api.niland.io/doc/users#add-a-user-dislike
+      def add_dislike(user, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("1.0/users/#{user}/dislikes", attributes)
-        Struct::Track.new(response)
+        response = client.post("2.0/users/#{user}/dislikes", attributes)
+        Struct::Track.new(response['track'])
       end
     end
   end
