@@ -12,4 +12,4 @@ X-Varnish: 2757811
 Age: 0
 Via: 1.1 varnish-v4
 
-{"id": "54d823e858172f11df4919d8", "name": "Niland Moods", "description": "Niland Moods", "tags": [{"id": 5000, "title": "Agressive_Intense"},{"id": 5005, "title": "Dramatic"},{"id": 5001, "title": "Energetic_Exciting"},{"id": 5004, "title": "Happy_Uplifting"},{"id": 5006, "title": "Inspirational"},{"id": 5002, "title": "Peaceful_LaidBack"},{"id": 5003, "title": "Sad_Melancholic"},{"id": 5007, "title": "Sentimental"},{"id": 5008, "title": "Sexy"}]}
+{"id": 5000, "title": "Agressive_Intense", "tag_collection": {"name": "Niland Moods"}}

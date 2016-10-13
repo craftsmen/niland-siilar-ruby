@@ -71,7 +71,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/tags#create-a-tag
       def create_tag(attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:title, :tag_collection])
-        response = client.post('2.0/tag-collections', attributes)
+        response = client.post('2.0/tags', attributes)
 
         Struct::Tag.new(response)
       end

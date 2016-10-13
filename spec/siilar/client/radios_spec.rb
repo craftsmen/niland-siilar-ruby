@@ -104,6 +104,62 @@ describe Siilar::Client, '.radios' do
     end
   end
 
+  describe '#delete' do
+    before do
+      stub_request(:delete, %r[/2.0/radios/.+]).to_return(read_fixture("radios/delete/success.http"))
+    end
+
+    it 'builds the correct request' do
+      subject.delete("568bb450e13aa09d878b4568")
+
+      expect(WebMock).to have_requested(:delete, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568?key=key')
+    end
+
+    it 'returns nothing' do
+      result = subject.delete("568bb450e13aa09d878b4568")
+
+      expect(result).to be_truthy
+    end
+
+    it 'supports HTTP 204' do
+      stub_request(:delete, %r[/2.0/radios/.+]).to_return(read_fixture('radios/delete/success-204.http'))
+
+      result = subject.delete("568bb450e13aa09d878b4568")
+
+      expect(result).to be_truthy
+    end
+
+    context 'when something does not exist' do
+      it 'raises NotFoundError' do
+        stub_request(:delete, %r[/2.0/radios/.+]).to_return(read_fixture('radios/notfound.http'))
+
+        expect { subject.delete("568bb450e13aa09d878b4568") }.to raise_error(Siilar::NotFoundError)
+      end
+    end
+  end
+
+  describe '#get_next' do
+    before do
+      stub_request(:get, %r[/2.0/radios/.+/next]).to_return(read_fixture('radios/get_next/success.http'))
+    end
+
+    it 'builds the correct request' do
+      radio = "57ff39bfee47ed2a058b4568"
+      subject.get_next(radio)
+
+      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/radios/57ff39bfee47ed2a058b4568/next?key=key')
+    end
+
+    it 'returns the next radio tracks' do
+      radio = "57ff39bfee47ed2a058b4568"
+      result = subject.get_next(radio)
+
+      expect(result).to be_an(Array)
+      expect(result.first).to be_a(Siilar::Struct::Track)
+      expect(result.first.id).to be_a(Integer)
+    end
+  end
+
   describe '#notify_skip' do
     before do
       stub_request(:post, %r[/2.0/radios/.+/skips]).to_return(read_fixture('radios/notify_skip/created.http'))
@@ -170,6 +226,28 @@ describe Siilar::Client, '.radios' do
     end
   end
 
+  describe '#notify_ban' do
+    before do
+      stub_request(:post, %r[/2.0/radios/.+/bans]).to_return(read_fixture('radios/notify_ban/created.http'))
+    end
+
+    it 'builds the correct request' do
+      attributes = { track: 125052 }
+      subject.notify_ban("568bb450e13aa09d878b4568", attributes)
+
+      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/bans?key=key')
+                          .with(body: attributes)
+    end
+
+    it 'returns the radio' do
+      attributes = { track: 125052 }
+      result = subject.notify_ban("568bb450e13aa09d878b4568", attributes)
+
+      expect(result).to be_a(Siilar::Struct::Radio)
+      expect(result.id).to be_a(String)
+    end
+  end
+
   describe '#notify_favorite' do
     before do
       stub_request(:post, %r[/2.0/radios/.+/favorites]).to_return(read_fixture('radios/notify_favorite/created.http'))
@@ -186,6 +264,28 @@ describe Siilar::Client, '.radios' do
     it 'returns the radio' do
       attributes = { track: 125052 }
       result = subject.notify_favorite("568bb450e13aa09d878b4568", attributes)
+
+      expect(result).to be_a(Siilar::Struct::Radio)
+      expect(result.id).to be_a(String)
+    end
+  end
+
+  describe '#notify_not_played' do
+    before do
+      stub_request(:post, %r[/2.0/radios/.+/notplayed]).to_return(read_fixture('radios/notify_not_played/created.http'))
+    end
+
+    it 'builds the correct request' do
+      attributes = { track: 125052 }
+      subject.notify_not_played("568bb450e13aa09d878b4568", attributes)
+
+      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/notplayed?key=key')
+                          .with(body: attributes)
+    end
+
+    it 'returns the radio' do
+      attributes = { track: 125052 }
+      result = subject.notify_not_played("568bb450e13aa09d878b4568", attributes)
 
       expect(result).to be_a(Siilar::Struct::Radio)
       expect(result.id).to be_a(String)

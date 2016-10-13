@@ -47,6 +47,10 @@ describe Siilar::Client, '.search' do
       expect(result).to be_a(Siilar::Struct::Suggestion)
       expect(result.tracks.first).to be_a(Siilar::Struct::Track)
       expect(result.tags.first).to be_a(Siilar::Struct::Tag)
+      expect(result.artists).to be_an(Array)
+      expect(result.albums).to be_an(Array)
+      expect(result.similar_artists).to be_an(Array)
+      expect(result.similar_tracks).to be_an(Array)
     end
   end
 end

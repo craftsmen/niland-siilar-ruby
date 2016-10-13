@@ -3,6 +3,26 @@ require 'spec_helper'
 describe Siilar::Client, '.tracks' do
   subject { described_class.new(api_endpoint: 'http://api.niland', api_key: 'key').tracks }
 
+  describe '#tracks' do
+    before do
+      stub_request(:get, %r[/2.0/tracks]).to_return(read_fixture('tags/list/success.http'))
+    end
+
+    it 'builds the correct request' do
+      subject.tracks
+
+      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/tracks?key=key')
+    end
+
+    it 'returns the tracks' do
+      result = subject.tracks
+
+      expect(result).to be_an(Array)
+      expect(result.first).to be_a(Siilar::Struct::Track)
+      expect(result.first.id).to be_a(Fixnum)
+    end
+  end
+
   describe '#track' do
     before do
       stub_request(:get, %r[/2.0/tracks]).to_return(read_fixture('tracks/track/success.http'))
@@ -126,6 +146,26 @@ describe Siilar::Client, '.tracks' do
 
         expect { subject.delete(1) }.to raise_error(Siilar::NotFoundError)
       end
+    end
+  end
+
+  describe '#tags' do
+    before do
+      stub_request(:get, %r[/2.0/tracks/.+/tags]).to_return(read_fixture('tracks/track_tags/success.http'))
+    end
+
+    it 'builds the correct request' do
+      subject.tags(187069)
+
+      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/tracks/187069/tags?key=key')
+    end
+
+    it 'returns the tags' do
+      result = subject.tags(187069)
+
+      expect(result).to be_an(Array)
+      expect(result.first).to be_a(Siilar::Struct::Tag)
+      expect(result.first.id).to be_a(Fixnum)
     end
   end
 end

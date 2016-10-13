@@ -43,17 +43,17 @@ module Siilar
       # Upload a temporary track.
       #
       # @see https://api.niland.io/2.0/doc/tracks#upload-a-temporary-track
-      def upload_temporary(attributes = {})
-        options = {
-          headers: {
-            'Content-Type' => 'multipart/form-data'
-          }
-        }
-        Extra.validate_mandatory_attributes(attributes, [:file])
-        response = client.execute(:post, '2.0/tracks/temporaries', attributes, options)
+      # def upload_temporary(attributes = {})
+      #   options = {
+      #     headers: {
+      #       'Content-Type' => 'multipart/form-data'
+      #     }
+      #   }
+      #   Extra.validate_mandatory_attributes(attributes, [:file])
+      #   response = client.execute(:post, '2.0/tracks/temporaries', attributes, options)
 
-        Struct::TemporaryTrack.new(response)
-      end
+      #   Struct::TemporaryTrack.new(response)
+      # end
 
       # Updates a track.
       #
@@ -67,16 +67,16 @@ module Siilar
       # Updates a track audio file
       #
       # @see https://api.niland.io/2.0/doc/tracks#upload-a-temporary-track
-      def upload_temporary(track, attributes = {})
-        options = {
-          headers: {
-            'Content-Type' => 'multipart/form-data'
-          }
-        }
-        response = client.execute(:post, "2.0/tracks/#{track}/audio", attributes, options)
+      # def edit_audio_file(track, attributes = {})
+      #   options = {
+      #     headers: {
+      #       'Content-Type' => 'multipart/form-data'
+      #     }
+      #   }
+      #   response = client.execute(:post, "2.0/tracks/#{track}/audio", attributes, options)
 
-        Struct::Track.new(response)
-      end
+      #   Struct::Track.new(response)
+      # end
 
       # Deletes a track.
       #

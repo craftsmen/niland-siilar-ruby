@@ -4,7 +4,6 @@ Access-Control-Allow-Origin: *
 Age: 0
 Cache-Control: private
 Connection: keep-alive
-Content-Length: 2674
 Content-Type: application/json
 Date: Tue, 05 Jan 2016 12:48:42 GMT
 Server: nginx/1.4.6 (Ubuntu)

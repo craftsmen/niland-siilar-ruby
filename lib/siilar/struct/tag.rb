@@ -10,7 +10,7 @@ module Siilar
       
       def tag_collection=(attrs)
         if attrs
-          @tag_collection = attrs.map { |tag_collection| Struct::TagCollection.new(tag_collection) }
+          @tag_collection = Struct::TagCollection.new(attrs)
         end
       end
     end
