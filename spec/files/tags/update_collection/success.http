@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+Server: nginx/1.4.6 (Ubuntu)
+Date: Thu, 26 Mar 2015 19:46:16 GMT
+Content-Type: application/json
+Content-Length: 452 
+Connection: keep-alive
+X-Powered-By: PHP/5.5.9-1ubuntu4.5
+Cache-Control: private, must-revalidate
+pragma: no-cache
+expires: -1
+
+{"id":"54d823e858172f11df4919d3","name":"Niland Instruments","description":"niland tag v1","tags":[{"id":1011,"title":"Brass","synonyms":[]},{"id":1002,"title":"Drum","synonyms":["Drums"]},{"id":1009,"title":"Guitar","synonyms":[]},{"id":48976,"title":"Orchestral Percussions","synonyms":[]},{"id":1004,"title":"Piano","synonyms":[]},{"id":1008,"title":"String","synonyms":["Strings"]},{"id":1005,"title":"Wood Wind","synonyms":[]}]}

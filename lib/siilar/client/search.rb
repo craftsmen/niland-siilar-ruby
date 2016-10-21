@@ -4,32 +4,22 @@ module Siilar
 
       # Search for a track
       #
-      # @see http://api.niland.io/1.0/doc/search-and-analyze#search
-      def similar(query = {})
+      # @see https://api.niland.io/2.0/doc/tracks#search-for-tracks
+      def tracks(query = {})
         options = { query: query }
-        response = client.get('1.0/search', options)
+        response = client.get('2.0/tracks/search', options)
 
-        response.map { |r| Struct::Track.new(r) }
+        response['data'].map { |r| Struct::Track.new(r) }
       end
 
       # Search for a track from external ids
       #
-      # @see http://api.niland.io/1.0/doc/search-and-analyze#search-from-external
-      def similar_from_external(query = {})
+      # @see http://api.niland.io/2.0/doc/search-and-analyze#search-from-external
+      def suggestions(query = {})
         options = { query: query }
-        response = client.get('1.0/search-from-external', options)
+        response = client.get('2.0/suggestions', options)
 
-        response.map { |r| Struct::Track.new(r) }
-      end
-
-      # Search for similar tracks from query
-      #
-      # @see https://api.niland.io/1.0/doc/search-and-analyze#search-from-any
-      def similar_from_any(query = {})
-        options = { query: query }
-        response = client.get('1.0/search-from-any', options)
-
-        response.map { |r| Struct::Track.new(r) }
+        Struct::Suggestion.new(response)
       end
     end
   end

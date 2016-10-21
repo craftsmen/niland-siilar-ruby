@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Access-Control-Allow-Origin: *
+Age: 0
+Cache-Control: private
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 05 Jan 2016 12:48:42 GMT
+Server: nginx/1.4.6 (Ubuntu)
+Via: 1.1 varnish-v4
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+X-Varnish: 5160398
+
+[{"id":5002,"title":"Peaceful-Laidback","tag_collection":{"name":"Niland Moods"},"synonyms":["Laidback"],"affinity":0.96},{"id":1001,"title":"Female Voice","tag_collection":{"name":"Niland Vocals"},"synonyms":[],"affinity":0.98},{"id":4003,"title":"Medium","tag_collection":{"name":"Niland Tempo"},"synonyms":[],"affinity":0.71},{"id":1050,"title":"Vocals","tag_collection":{"name":"Niland Vocals"},"synonyms":[],"affinity":0.99},{"id":1009,"title":"Guitar","tag_collection":{"name":"Niland Instruments"},"synonyms":[],"affinity":0.82},{"id":3009,"title":"Pop","tag_collection":{"name":"Niland Genres"},"synonyms":[],"affinity":0.7}]

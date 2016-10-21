@@ -12,4 +12,4 @@ X-Powered-By: PHP/5.5.9-1ubuntu4.14
 X-Varnish: 5160398
 transfer-encoding: chunked
 
-{"id":"568bbb8be13aa0e8878b4567","current_tracks":[],"seeds":[{"id":104428,"hash":"2b5CB943","title":"Come Closer","popularity":null,"album":{"name":"Pizza"},"artist":{"name":"Treefight For Sunlight"},"duration":223,"external_id":"5361","isrc":"DKPF51400307","year":null}],"tags":[],"user":{"external_id":"14","birthdate":"1991-12-04T00:00:00+0000","gender":"M","country":null,"city":null}}
+{"id":"57ff39bfee47ed2a058b4568","current_tracks":[],"seeds":[{"id":104428,"title":"Come Closer","popularity":null,"album":{"name":"Pizza"},"artist":{"name":"Treefight For Sunlight"},"duration":223,"reference":"5361","isrc":"DKPF51400307","year":null,"created_at":"2015-03-11T18:31:41+0000","tags":[]}],"tags":[],"user":{"reference":"14","birthdate":"1991-12-04T00:00:00+0000","gender":"M","country":"France","city":null,"cold_start_tracks":[]},"status":null}

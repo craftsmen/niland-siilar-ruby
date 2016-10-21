@@ -10,4 +10,4 @@ X-Powered-By: PHP/5.5.9-1ubuntu4.14
 expires: -1
 pragma: no-cache
 
-{"external_id":"14","birthdate":"1991-12-04T00:00:00+0000","gender":"M","country":"France","city":null}
+{"reference":"14","birthdate":"1991-12-04T00:00:00+0000","gender":"M","country":"France","city":null}

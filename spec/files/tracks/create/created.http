@@ -12,4 +12,4 @@ X-Varnish: 2757811
 Age: 0
 Via: 1.1 varnish-v4
 
-{"id":98004,"hash":"92c94Cd6","title":"Nine Lives","popularity":null,"album":null,"artist":null,"duration":null,"external_id":"1234","isrc":null,"waveform_url":null}
+{"id":98004,"hash":"92c94Cd6","title":"Nine Lives","popularity":null,"album":null,"artist":null,"duration":null,"reference":"1234","isrc":null,"waveform_url":null}

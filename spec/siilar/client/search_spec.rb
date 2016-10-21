@@ -3,22 +3,22 @@ require 'spec_helper'
 describe Siilar::Client, '.search' do
   subject { described_class.new(api_endpoint: 'http://api.niland', api_key: 'key').search }
 
-  describe '#similar' do
+  describe '#tracks' do
     before do
-      stub_request(:get, %r[/1.0/search]).to_return(read_fixture('search/similar/success.http'))
+      stub_request(:get, %r[/2.0/tracks/search]).to_return(read_fixture('search/tracks/success.http'))
     end
 
     it 'builds the correct request' do
       attributes = { similar_tracks: '1234' }
-      subject.similar(attributes)
+      subject.tracks(attributes)
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/1.0/search?similar_tracks=1234&key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/tracks/search?similar_tracks=1234&key=key')
                           .with(query: attributes)
     end
 
     it 'returns the search results' do
       attributes = { similar_tracks: '1234' }
-      result = subject.similar(attributes)
+      result = subject.tracks(attributes)
 
       expect(result).to be_a(Array)
       expect(result.first).to be_a(Siilar::Struct::Track)
@@ -27,51 +27,30 @@ describe Siilar::Client, '.search' do
     end
   end
 
-  describe '#similar_from_external' do
+  describe '#suggestions' do
     before do
-      stub_request(:get, %r[/1.0/search-from-external]).to_return(read_fixture('search/similar/success.http'))
+      stub_request(:get, %r[/2.0/suggestions]).to_return(read_fixture('search/suggestions/success.http'))
     end
 
     it 'builds the correct request' do
-      attributes = { similar_tracks: '1234' }
-      subject.similar_from_external(attributes)
+      attributes = { query: 'radioh' }
+      subject.suggestions(attributes)
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/1.0/search-from-external?similar_tracks=1234&key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/suggestions?key=key')
                           .with(query: attributes)
     end
 
     it 'returns the search results' do
-      attributes = { similar_tracks: '1234' }
-      result = subject.similar_from_external(attributes)
+      attributes = { query: 'radioh' }
+      result = subject.suggestions(attributes)
 
-      expect(result).to be_a(Array)
-      expect(result.first).to be_a(Siilar::Struct::Track)
-      expect(result.first.album).to be_a(Siilar::Struct::Album)
-      expect(result.first.artist).to be_a(Siilar::Struct::Artist)
-    end
-  end
-
-  describe '#similar_from_any' do
-    before do
-      stub_request(:get, %r[/1.0/search-from-any]).to_return(read_fixture('search/similar/success.http'))
-    end
-
-    it 'builds the correct request' do
-      attributes = { query: 'radiohead' }
-      subject.similar_from_any(attributes)
-
-      expect(WebMock).to have_requested(:get, 'http://api.niland/1.0/search-from-any?query=radiohead&key=key')
-                          .with(query: attributes)
-    end
-
-    it 'returns the search results' do
-      attributes = { query: 'radiohead' }
-      result = subject.similar_from_any(attributes)
-
-      expect(result).to be_a(Array)
-      expect(result.first).to be_a(Siilar::Struct::Track)
-      expect(result.first.album).to be_a(Siilar::Struct::Album)
-      expect(result.first.artist).to be_a(Siilar::Struct::Artist)
+      expect(result).to be_a(Siilar::Struct::Suggestion)
+      expect(result.tracks.first).to be_a(Siilar::Struct::Track)
+      expect(result.tags.first).to be_a(Siilar::Struct::Tag)
+      expect(result.artists).to be_an(Array)
+      expect(result.albums).to be_an(Array)
+      expect(result.similar_artists).to be_an(Array)
+      expect(result.similar_tracks).to be_an(Array)
     end
   end
 end

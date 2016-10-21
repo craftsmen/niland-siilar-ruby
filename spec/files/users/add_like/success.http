@@ -3,7 +3,6 @@ Access-Control-Allow-Origin: *
 Age: 0
 Cache-Control: private, must-revalidate
 Connection: keep-alive
-Content-Length: 209
 Content-Type: application/json
 Date: Tue, 05 Jan 2016 14:44:01 GMT
 Server: nginx/1.4.6 (Ubuntu)
@@ -13,4 +12,4 @@ X-Varnish: 4705336
 expires: -1
 pragma: no-cache
 
-{"id":104428,"hash":"2b5CB943","title":"Come Closer","popularity":null,"album":{"name":"Pizza"},"artist":{"name":"Treefight For Sunlight"},"duration":223,"external_id":"5361","isrc":"DKPF51400307","year":null}
+{"type":"like","track":{"id":104428,"title":"Come Closer","popularity":null,"album":{"name":"Pizza"},"artist":{"name":"Treefight For Sunlight"},"duration":223,"reference":"5361","isrc":"DKPF51400307","year":null,"created_at":"2015-03-11T18:31:41+0000","tags":[]}}

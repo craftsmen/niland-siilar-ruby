@@ -2,7 +2,6 @@ HTTP/1.1 200 OK
 Server: nginx/1.4.6 (Ubuntu)
 Date: Thu, 26 Mar 2015 19:43:31 GMT
 Content-Type: application/json
-Content-Length: 222
 Connection: keep-alive
 X-Powered-By: PHP/5.5.9-1ubuntu4.5
 Cache-Control: private
@@ -11,4 +10,4 @@ Age: 0
 Via: 1.1 varnish-v4
 Accept-Ranges: bytes
 
-{"id":187069,"hash":"16E5a170","title":"Dahoim isch Dahoim","popularity":null,"album":{"name":"Zsamma besser dran"},"artist":{"name":"So Semmer Halt"},"duration":602,"external_id":"88988","isrc":"DEE841425050","year":null}
+{"id":85265,"title":"Remember Me","popularity":null,"album":{"name":"Bridges"},"artist":{"name":"Eiv\u00f8r"},"duration":217,"reference":"1","isrc":"FR2X41454387","year":null,"created_at":"2015-03-07T22:53:17+0000","tags":[]}
