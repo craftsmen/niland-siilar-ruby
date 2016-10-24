@@ -7,7 +7,7 @@ module Siilar
       # @see https://api.niland.io/2.0/doc/tracks#search-for-tracks
       def tracks(query = {})
         options = { query: query }
-        response = client.get('2.0/tracks/search', options)
+        response = client.get('tracks/search', options)
 
         response['data'].map { |r| Struct::Track.new(r) }
       end
@@ -17,7 +17,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/search-and-analyze#search-from-external
       def suggestions(query = {})
         options = { query: query }
-        response = client.get('2.0/suggestions', options)
+        response = client.get('suggestions', options)
 
         Struct::Suggestion.new(response)
       end

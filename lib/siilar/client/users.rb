@@ -6,7 +6,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/users#list-users
       def list(query = {})
-        response = client.get('2.0/users')
+        response = client.get('users')
         response['data'].map { |user| Struct::User.new(user) }
       end
 
@@ -14,7 +14,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/users#get-a-user
       def get(user)
-        response = client.get("2.0/users/#{user}")
+        response = client.get("users/#{user}")
         Struct::User.new(response)
       end
 
@@ -23,7 +23,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/users#create-a-user
       def create(attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:reference])
-        response = client.post('2.0/users', attributes)
+        response = client.post('users', attributes)
         Struct::User.new(response)
       end
 
@@ -31,7 +31,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/users#edit-a-user
       def update(user, attributes = {})
-        response = client.patch("2.0/users/#{user}", attributes)
+        response = client.patch("users/#{user}", attributes)
         Struct::User.new(response)
       end
 
@@ -39,14 +39,14 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/users#delete-a-user
       def delete(user)
-        client.delete("2.0/users/#{user}")
+        client.delete("users/#{user}")
       end
 
       # Get user likes
       #
       # @see http://api.niland.io/2.0/doc/users#get-user-likes
       def get_likes(user)
-        response = client.get("2.0/users/#{user}/likes")
+        response = client.get("users/#{user}/likes")
         response['data'].map { |track| Struct::Track.new(track) }
       end
 
@@ -55,7 +55,7 @@ module Siilar
       # @see https://api.niland.io/doc/users#add-a-user-like
       def add_like(user, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("2.0/users/#{user}/likes", attributes)
+        response = client.post("users/#{user}/likes", attributes)
         Struct::Track.new(response['track'])
       end
 
@@ -63,7 +63,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/users#get-user-dislikes
       def get_dislikes(user)
-        response = client.get("2.0/users/#{user}/dislikes")
+        response = client.get("users/#{user}/dislikes")
         response['data'].map { |track| Struct::Track.new(track) }
       end
 
@@ -72,7 +72,7 @@ module Siilar
       # @see https://api.niland.io/doc/users#add-a-user-dislike
       def add_dislike(user, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("2.0/users/#{user}/dislikes", attributes)
+        response = client.post("users/#{user}/dislikes", attributes)
         Struct::Track.new(response['track'])
       end
     end

@@ -1,17 +1,17 @@
 require 'spec_helper'
 
 describe Siilar::Client, '.radios' do
-  subject { described_class.new(api_endpoint: 'http://api.niland', api_key: 'key').radios }
+  subject { described_class.new(api_endpoint: 'http://api.niland.io/2.0', api_key: 'key').radios }
 
   describe '#list' do
     before do
-      stub_request(:get, %r[/2.0/radios]).to_return(read_fixture('radios/list/success.http'))
+      stub_request(:get, %r[/radios]).to_return(read_fixture('radios/list/success.http'))
     end
 
     it 'builds the correct request' do
       subject.list
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/radios?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland.io/2.0/radios?key=key')
     end
 
     it 'returns the radio' do
@@ -25,14 +25,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#get' do
     before do
-      stub_request(:get, %r[/2.0/radios/.+]).to_return(read_fixture('radios/get/success.http'))
+      stub_request(:get, %r[/radios/.+]).to_return(read_fixture('radios/get/success.http'))
     end
 
     it 'builds the correct request' do
       radio = "568bbb8be13aa0e8878b4567"
       subject.get(radio)
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/radios/568bbb8be13aa0e8878b4567?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland.io/2.0/radios/568bbb8be13aa0e8878b4567?key=key')
     end
 
     it 'returns the radio' do
@@ -46,14 +46,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#create' do
     before do
-      stub_request(:post, %r[/2.0/radios]).to_return(read_fixture('radios/create/created.http'))
+      stub_request(:post, %r[/radios]).to_return(read_fixture('radios/create/created.http'))
     end
 
     it 'builds the correct request' do
       attributes = { seeds: ["104428"], user: "14" }
       subject.create(attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland.io/2.0/radios?key=key')
                           .with(body: attributes)
     end
 
@@ -68,14 +68,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#edit' do
     before do
-      stub_request(:patch, %r[/2.0/radios/.+]).to_return(read_fixture('radios/edit/success.http'))
+      stub_request(:patch, %r[/radios/.+]).to_return(read_fixture('radios/edit/success.http'))
     end
 
     it 'builds the correct request' do
       attributes = { seeds: ["104428"], user: "14" }
       subject.edit("568bb450e13aa09d878b4568", attributes)
 
-      expect(WebMock).to have_requested(:patch, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568?key=key')
+      expect(WebMock).to have_requested(:patch, 'http://api.niland.io/2.0/radios/568bb450e13aa09d878b4568?key=key')
                           .with(body: attributes)
     end
 
@@ -89,7 +89,7 @@ describe Siilar::Client, '.radios' do
 
     context 'when the request is not well formed' do
       it 'raises NotFoundError' do
-        stub_request(:patch, %r[/2.0]).to_return(read_fixture('radios/edit/badrequest.http'))
+        stub_request(:patch, %r[/]).to_return(read_fixture('radios/edit/badrequest.http'))
 
         expect { subject.edit("568bb450e13aa09d878b4568", {}) }.to raise_error(Siilar::RequestError)
       end
@@ -97,7 +97,7 @@ describe Siilar::Client, '.radios' do
 
     context 'when something does not exist' do
       it 'raises NotFoundError' do
-        stub_request(:patch, %r[/2.0]).to_return(read_fixture('radios/notfound.http'))
+        stub_request(:patch, %r[/]).to_return(read_fixture('radios/notfound.http'))
 
         expect { subject.edit("568bb450e13aa09d878b4568", {}) }.to raise_error(Siilar::NotFoundError)
       end
@@ -106,13 +106,13 @@ describe Siilar::Client, '.radios' do
 
   describe '#delete' do
     before do
-      stub_request(:delete, %r[/2.0/radios/.+]).to_return(read_fixture("radios/delete/success.http"))
+      stub_request(:delete, %r[/radios/.+]).to_return(read_fixture("radios/delete/success.http"))
     end
 
     it 'builds the correct request' do
       subject.delete("568bb450e13aa09d878b4568")
 
-      expect(WebMock).to have_requested(:delete, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568?key=key')
+      expect(WebMock).to have_requested(:delete, 'http://api.niland.io/2.0/radios/568bb450e13aa09d878b4568?key=key')
     end
 
     it 'returns nothing' do
@@ -122,7 +122,7 @@ describe Siilar::Client, '.radios' do
     end
 
     it 'supports HTTP 204' do
-      stub_request(:delete, %r[/2.0/radios/.+]).to_return(read_fixture('radios/delete/success-204.http'))
+      stub_request(:delete, %r[/radios/.+]).to_return(read_fixture('radios/delete/success-204.http'))
 
       result = subject.delete("568bb450e13aa09d878b4568")
 
@@ -131,7 +131,7 @@ describe Siilar::Client, '.radios' do
 
     context 'when something does not exist' do
       it 'raises NotFoundError' do
-        stub_request(:delete, %r[/2.0/radios/.+]).to_return(read_fixture('radios/notfound.http'))
+        stub_request(:delete, %r[/radios/.+]).to_return(read_fixture('radios/notfound.http'))
 
         expect { subject.delete("568bb450e13aa09d878b4568") }.to raise_error(Siilar::NotFoundError)
       end
@@ -140,14 +140,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#get_next' do
     before do
-      stub_request(:get, %r[/2.0/radios/.+/next]).to_return(read_fixture('radios/get_next/success.http'))
+      stub_request(:get, %r[/radios/.+/next]).to_return(read_fixture('radios/get_next/success.http'))
     end
 
     it 'builds the correct request' do
       radio = "57ff39bfee47ed2a058b4568"
       subject.get_next(radio)
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/radios/57ff39bfee47ed2a058b4568/next?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland.io/2.0/radios/57ff39bfee47ed2a058b4568/next?key=key')
     end
 
     it 'returns the next radio tracks' do
@@ -162,14 +162,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#notify_skip' do
     before do
-      stub_request(:post, %r[/2.0/radios/.+/skips]).to_return(read_fixture('radios/notify_skip/created.http'))
+      stub_request(:post, %r[/radios/.+/skips]).to_return(read_fixture('radios/notify_skip/created.http'))
     end
 
     it 'builds the correct request' do
       attributes = { track: 125052 }
       subject.notify_skip("568bb450e13aa09d878b4568", attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/skips?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland.io/2.0/radios/568bb450e13aa09d878b4568/skips?key=key')
                           .with(body: attributes)
     end
 
@@ -184,14 +184,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#notify_like' do
     before do
-      stub_request(:post, %r[/2.0/radios/.+/likes]).to_return(read_fixture('radios/notify_like/created.http'))
+      stub_request(:post, %r[/radios/.+/likes]).to_return(read_fixture('radios/notify_like/created.http'))
     end
 
     it 'builds the correct request' do
       attributes = { track: 125052 }
       subject.notify_like("568bb450e13aa09d878b4568", attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/likes?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland.io/2.0/radios/568bb450e13aa09d878b4568/likes?key=key')
                           .with(body: attributes)
     end
 
@@ -206,14 +206,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#notify_dislike' do
     before do
-      stub_request(:post, %r[/2.0/radios/.+/dislikes]).to_return(read_fixture('radios/notify_dislike/created.http'))
+      stub_request(:post, %r[/radios/.+/dislikes]).to_return(read_fixture('radios/notify_dislike/created.http'))
     end
 
     it 'builds the correct request' do
       attributes = { track: 125052 }
       subject.notify_dislike("568bb450e13aa09d878b4568", attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/dislikes?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland.io/2.0/radios/568bb450e13aa09d878b4568/dislikes?key=key')
                           .with(body: attributes)
     end
 
@@ -228,14 +228,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#notify_ban' do
     before do
-      stub_request(:post, %r[/2.0/radios/.+/bans]).to_return(read_fixture('radios/notify_ban/created.http'))
+      stub_request(:post, %r[/radios/.+/bans]).to_return(read_fixture('radios/notify_ban/created.http'))
     end
 
     it 'builds the correct request' do
       attributes = { track: 125052 }
       subject.notify_ban("568bb450e13aa09d878b4568", attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/bans?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland.io/2.0/radios/568bb450e13aa09d878b4568/bans?key=key')
                           .with(body: attributes)
     end
 
@@ -250,14 +250,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#notify_favorite' do
     before do
-      stub_request(:post, %r[/2.0/radios/.+/favorites]).to_return(read_fixture('radios/notify_favorite/created.http'))
+      stub_request(:post, %r[/radios/.+/favorites]).to_return(read_fixture('radios/notify_favorite/created.http'))
     end
 
     it 'builds the correct request' do
       attributes = { track: 125052 }
       subject.notify_favorite("568bb450e13aa09d878b4568", attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/favorites?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland.io/2.0/radios/568bb450e13aa09d878b4568/favorites?key=key')
                           .with(body: attributes)
     end
 
@@ -272,14 +272,14 @@ describe Siilar::Client, '.radios' do
 
   describe '#notify_not_played' do
     before do
-      stub_request(:post, %r[/2.0/radios/.+/notplayed]).to_return(read_fixture('radios/notify_not_played/created.http'))
+      stub_request(:post, %r[/radios/.+/notplayed]).to_return(read_fixture('radios/notify_not_played/created.http'))
     end
 
     it 'builds the correct request' do
       attributes = { track: 125052 }
       subject.notify_not_played("568bb450e13aa09d878b4568", attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/notplayed?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland.io/2.0/radios/568bb450e13aa09d878b4568/notplayed?key=key')
                           .with(body: attributes)
     end
 

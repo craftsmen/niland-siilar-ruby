@@ -6,7 +6,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#list-radios
       def list
-        response = client.get('2.0/radios')
+        response = client.get('radios')
         response['data'].map { |radio| Struct::Radio.new(radio) }
       end
 
@@ -14,7 +14,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#get-a-radio
       def get(radio)
-        response = client.get("2.0/radios/#{radio}")
+        response = client.get("radios/#{radio}")
         Struct::Radio.new(response)
       end
 
@@ -22,7 +22,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#create-a-radio
       def create(attributes = {})
-        response = client.post('2.0/radios', attributes)
+        response = client.post('radios', attributes)
         Struct::Radio.new(response)
       end
 
@@ -30,7 +30,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#edit-a-radio
       def edit(radio, attributes = {})
-        response = client.patch("2.0/radios/#{radio}", attributes)
+        response = client.patch("radios/#{radio}", attributes)
         Struct::Radio.new(response)
       end
 
@@ -38,14 +38,14 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#delete-a-radio
       def delete(radio, attributes = {})
-        response = client.delete("2.0/radios/#{radio}")
+        response = client.delete("radios/#{radio}")
       end
 
       # Get next radio tracks
       #
       # @see http://api.niland.io/2.0/doc/radios#get-next-radio-tracks
       def get_next(radio)
-        response = client.get("2.0/radios/#{radio}/next")
+        response = client.get("radios/#{radio}/next")
         response.map { |track| Struct::Track.new(track) }
       end
 
@@ -54,7 +54,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/radios#notify-a-skip
       def notify_skip(radio, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("2.0/radios/#{radio}/skips", attributes)
+        response = client.post("radios/#{radio}/skips", attributes)
         Struct::Radio.new(response)
       end
 
@@ -63,7 +63,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/radios#notify-a-like
       def notify_like(radio, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("2.0/radios/#{radio}/likes", attributes)
+        response = client.post("radios/#{radio}/likes", attributes)
         Struct::Radio.new(response)
       end
 
@@ -72,7 +72,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/radios#notify-a-dislike
       def notify_dislike(radio, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("2.0/radios/#{radio}/dislikes", attributes)
+        response = client.post("radios/#{radio}/dislikes", attributes)
         Struct::Radio.new(response)
       end
 
@@ -81,7 +81,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/radios#notify-a-ban
       def notify_ban(radio, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("2.0/radios/#{radio}/bans", attributes)
+        response = client.post("radios/#{radio}/bans", attributes)
         Struct::Radio.new(response)
       end
 
@@ -90,7 +90,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/radios#notify-a-favorite
       def notify_favorite(radio, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("2.0/radios/#{radio}/favorites", attributes)
+        response = client.post("radios/#{radio}/favorites", attributes)
         Struct::Radio.new(response)
       end
 
@@ -99,7 +99,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/radios#notify-a-not-played-track
       def notify_not_played(radio, attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:track])
-        response = client.post("2.0/radios/#{radio}/notplayed", attributes)
+        response = client.post("radios/#{radio}/notplayed", attributes)
         Struct::Radio.new(response)
       end
     end

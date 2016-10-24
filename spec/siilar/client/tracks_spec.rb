@@ -1,17 +1,17 @@
 require 'spec_helper'
 
 describe Siilar::Client, '.tracks' do
-  subject { described_class.new(api_endpoint: 'http://api.niland', api_key: 'key').tracks }
+  subject { described_class.new(api_endpoint: 'http://api.niland.io/2.0', api_key: 'key').tracks }
 
   describe '#tracks' do
     before do
-      stub_request(:get, %r[/2.0/tracks]).to_return(read_fixture('tags/list/success.http'))
+      stub_request(:get, %r[/tracks]).to_return(read_fixture('tags/list/success.http'))
     end
 
     it 'builds the correct request' do
       subject.tracks
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/tracks?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland.io/2.0/tracks?key=key')
     end
 
     it 'returns the tracks' do
@@ -25,14 +25,14 @@ describe Siilar::Client, '.tracks' do
 
   describe '#track' do
     before do
-      stub_request(:get, %r[/2.0/tracks]).to_return(read_fixture('tracks/track/success.http'))
+      stub_request(:get, %r[/tracks]).to_return(read_fixture('tracks/track/success.http'))
     end
 
     it 'builds the correct request' do
       track = 187069
       subject.track(track)
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/tracks/187069?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland.io/2.0/tracks/187069?key=key')
     end
 
     it 'returns the track' do
@@ -46,14 +46,14 @@ describe Siilar::Client, '.tracks' do
 
   describe '#from_reference' do
     before do
-      stub_request(:get, %r[/2.0/tracks/reference]).to_return(read_fixture('tracks/from_reference/success.http'))
+      stub_request(:get, %r[/tracks/reference]).to_return(read_fixture('tracks/from_reference/success.http'))
     end
 
     it 'builds the correct request' do
       track = 88988
       subject.from_reference(track)
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/tracks/reference/88988?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland.io/2.0/tracks/reference/88988?key=key')
     end
 
     it 'returns the track' do
@@ -67,14 +67,14 @@ describe Siilar::Client, '.tracks' do
 
   describe '#create' do
     before do
-      stub_request(:post, %r[/2.0/tracks]).to_return(read_fixture('tracks/create/created.http'))
+      stub_request(:post, %r[/tracks]).to_return(read_fixture('tracks/create/created.http'))
     end
 
     it 'builds the correct request' do
       attributes = { title: 'Nine Lives', reference: '1234' }
       subject.create(attributes)
 
-      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/tracks?key=key')
+      expect(WebMock).to have_requested(:post, 'http://api.niland.io/2.0/tracks?key=key')
                           .with(body: attributes)
     end
 
@@ -89,13 +89,13 @@ describe Siilar::Client, '.tracks' do
 
   describe '#update' do
     before do
-      stub_request(:patch, %r[/2.0/tracks/.+]).to_return(read_fixture('tracks/update/success.http'))
+      stub_request(:patch, %r[/tracks/.+]).to_return(read_fixture('tracks/update/success.http'))
     end
 
     it 'builds the correct request' do
       subject.update(1, { title: 'Updated' })
 
-      expect(WebMock).to have_requested(:patch, 'http://api.niland/2.0/tracks/1?key=key')
+      expect(WebMock).to have_requested(:patch, 'http://api.niland.io/2.0/tracks/1?key=key')
                           .with(body: { title: 'Updated' })
     end
 
@@ -108,7 +108,7 @@ describe Siilar::Client, '.tracks' do
 
     context 'when something does not exist' do
       it 'raises NotFoundError' do
-        stub_request(:patch, %r[/2.0]).to_return(read_fixture('tracks/notfound.http'))
+        stub_request(:patch, %r[/]).to_return(read_fixture('tracks/notfound.http'))
 
         expect { subject.update(1, {}) }.to raise_error(Siilar::NotFoundError)
       end
@@ -117,13 +117,13 @@ describe Siilar::Client, '.tracks' do
 
   describe '#delete' do
     before do
-      stub_request(:delete, %r[/2.0/tracks/1]).to_return(read_fixture("tracks/delete/success.http"))
+      stub_request(:delete, %r[/tracks/1]).to_return(read_fixture("tracks/delete/success.http"))
     end
 
     it 'builds the correct request' do
       subject.delete(1)
 
-      expect(WebMock).to have_requested(:delete, 'http://api.niland/2.0/tracks/1?key=key')
+      expect(WebMock).to have_requested(:delete, 'http://api.niland.io/2.0/tracks/1?key=key')
     end
 
     it 'returns nothing' do
@@ -133,7 +133,7 @@ describe Siilar::Client, '.tracks' do
     end
 
     it 'supports HTTP 204' do
-      stub_request(:delete, %r[/2.0/tracks/1]).to_return(read_fixture('tracks/delete/success-204.http'))
+      stub_request(:delete, %r[/tracks/1]).to_return(read_fixture('tracks/delete/success-204.http'))
 
       result = subject.delete(1)
 
@@ -142,7 +142,7 @@ describe Siilar::Client, '.tracks' do
 
     context 'when something does not exist' do
       it 'raises NotFoundError' do
-        stub_request(:delete, %r[/2.0/tracks/1]).to_return(read_fixture('tracks/notfound.http'))
+        stub_request(:delete, %r[/tracks/1]).to_return(read_fixture('tracks/notfound.http'))
 
         expect { subject.delete(1) }.to raise_error(Siilar::NotFoundError)
       end
@@ -151,13 +151,13 @@ describe Siilar::Client, '.tracks' do
 
   describe '#tags' do
     before do
-      stub_request(:get, %r[/2.0/tracks/.+/tags]).to_return(read_fixture('tracks/track_tags/success.http'))
+      stub_request(:get, %r[/tracks/.+/tags]).to_return(read_fixture('tracks/track_tags/success.http'))
     end
 
     it 'builds the correct request' do
       subject.tags(187069)
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/tracks/187069/tags?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland.io/2.0/tracks/187069/tags?key=key')
     end
 
     it 'returns the tags' do
