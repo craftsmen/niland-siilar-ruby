@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe Siilar::Client, '.search' do
-  subject { described_class.new(api_endpoint: 'http://api.niland', api_key: 'key').search }
+  subject { described_class.new(api_endpoint: 'http://api.niland.io/2.0', api_key: 'key').search }
 
   describe '#tracks' do
     before do
-      stub_request(:get, %r[/2.0/tracks/search]).to_return(read_fixture('search/tracks/success.http'))
+      stub_request(:get, %r[/tracks/search]).to_return(read_fixture('search/tracks/success.http'))
     end
 
     it 'builds the correct request' do
       attributes = { similar_tracks: '1234' }
       subject.tracks(attributes)
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/tracks/search?similar_tracks=1234&key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland.io/2.0/tracks/search?similar_tracks=1234&key=key')
                           .with(query: attributes)
     end
 
@@ -29,14 +29,14 @@ describe Siilar::Client, '.search' do
 
   describe '#suggestions' do
     before do
-      stub_request(:get, %r[/2.0/suggestions]).to_return(read_fixture('search/suggestions/success.http'))
+      stub_request(:get, %r[/suggestions]).to_return(read_fixture('search/suggestions/success.http'))
     end
 
     it 'builds the correct request' do
       attributes = { query: 'radioh' }
       subject.suggestions(attributes)
 
-      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/suggestions?key=key')
+      expect(WebMock).to have_requested(:get, 'http://api.niland.io/2.0/suggestions?key=key')
                           .with(query: attributes)
     end
 

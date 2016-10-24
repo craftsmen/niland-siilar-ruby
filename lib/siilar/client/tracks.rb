@@ -7,7 +7,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/tracks#list-tracks
       def tracks(query = {})
         options = { query: query }
-        response = client.get("2.0/tracks", options)
+        response = client.get("tracks", options)
 
         response['data'].map { |track| Struct::Track.new(track) }
       end
@@ -16,7 +16,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/tracks#get-a-track
       def track(track)
-        response = client.get("2.0/tracks/#{track}")
+        response = client.get("tracks/#{track}")
 
         Struct::Track.new(response)
       end
@@ -25,7 +25,7 @@ module Siilar
       #
       # @see https://api.niland.io/doc/tracks#get-a-track-from-your-internal-reference
       def from_reference(reference)
-        response = client.get("2.0/tracks/reference/#{reference}")
+        response = client.get("tracks/reference/#{reference}")
 
         Struct::Track.new(response)
       end
@@ -35,7 +35,7 @@ module Siilar
       # @see http://api.niland.io/2.0/doc/tracks#create-a-track
       def create(attributes = {})
         Extra.validate_mandatory_attributes(attributes, [:title, :reference])
-        response = client.post('2.0/tracks', attributes)
+        response = client.post('tracks', attributes)
 
         Struct::Track.new(response)
       end
@@ -50,7 +50,7 @@ module Siilar
       #     }
       #   }
       #   Extra.validate_mandatory_attributes(attributes, [:file])
-      #   response = client.execute(:post, '2.0/tracks/temporaries', attributes, options)
+      #   response = client.execute(:post, 'tracks/temporaries', attributes, options)
 
       #   Struct::TemporaryTrack.new(response)
       # end
@@ -59,7 +59,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/tracks#edit-a-track
       def update(track, attributes = {})
-        response = client.patch("2.0/tracks/#{track}", attributes)
+        response = client.patch("tracks/#{track}", attributes)
 
         Struct::Track.new(response)
       end
@@ -73,7 +73,7 @@ module Siilar
       #       'Content-Type' => 'multipart/form-data'
       #     }
       #   }
-      #   response = client.execute(:post, "2.0/tracks/#{track}/audio", attributes, options)
+      #   response = client.execute(:post, "tracks/#{track}/audio", attributes, options)
 
       #   Struct::Track.new(response)
       # end
@@ -82,7 +82,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/tracks#delete-a-track
       def delete(track)
-        client.delete("2.0/tracks/#{track}")
+        client.delete("tracks/#{track}")
       end
 
 
@@ -90,7 +90,7 @@ module Siilar
       #
       # @see https://api.niland.io/2.0/doc/tracks#get-track-tags
       def tags(track)
-        response = client.get("2.0/tracks/#{track}/tags")
+        response = client.get("tracks/#{track}/tags")
 
         response.map { |tag| Struct::Tag.new(tag) }
       end
