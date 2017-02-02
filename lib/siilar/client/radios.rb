@@ -53,7 +53,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#notify-a-skip
       def notify_skip(radio, attributes = {})
-        Extra.validate_mandatory_attributes(attributes, [:track])
+        validate_arguments_has_track_or_reference(attributes)
         response = client.post("2.0/radios/#{radio}/skips", attributes)
         Struct::Radio.new(response)
       end
@@ -62,7 +62,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#notify-a-like
       def notify_like(radio, attributes = {})
-        Extra.validate_mandatory_attributes(attributes, [:track])
+        validate_arguments_has_track_or_reference(attributes)
         response = client.post("2.0/radios/#{radio}/likes", attributes)
         Struct::Radio.new(response)
       end
@@ -71,7 +71,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#notify-a-dislike
       def notify_dislike(radio, attributes = {})
-        Extra.validate_mandatory_attributes(attributes, [:track])
+        validate_arguments_has_track_or_reference(attributes)
         response = client.post("2.0/radios/#{radio}/dislikes", attributes)
         Struct::Radio.new(response)
       end
@@ -80,7 +80,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#notify-a-ban
       def notify_ban(radio, attributes = {})
-        Extra.validate_mandatory_attributes(attributes, [:track])
+        validate_arguments_has_track_or_reference(attributes)
         response = client.post("2.0/radios/#{radio}/bans", attributes)
         Struct::Radio.new(response)
       end
@@ -89,7 +89,7 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#notify-a-favorite
       def notify_favorite(radio, attributes = {})
-        Extra.validate_mandatory_attributes(attributes, [:track])
+        validate_arguments_has_track_or_reference(attributes)
         response = client.post("2.0/radios/#{radio}/favorites", attributes)
         Struct::Radio.new(response)
       end
@@ -98,10 +98,19 @@ module Siilar
       #
       # @see http://api.niland.io/2.0/doc/radios#notify-a-not-played-track
       def notify_not_played(radio, attributes = {})
-        Extra.validate_mandatory_attributes(attributes, [:track])
+        validate_arguments_has_track_or_reference(attributes)
         response = client.post("2.0/radios/#{radio}/notplayed", attributes)
         Struct::Radio.new(response)
       end
+
+      private
+ 
+      def validate_arguments_has_track_or_reference(attributes)
+        if !(attributes.key?(:track) ^ attributes.key?(:reference))
+          raise(ArgumentError, ":track or :reference is required. They are mutually exclusive")
+        end
+      end
+
     end
   end
 end
