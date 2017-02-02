@@ -165,12 +165,25 @@ describe Siilar::Client, '.radios' do
       stub_request(:post, %r[/2.0/radios/.+/skips]).to_return(read_fixture('radios/notify_skip/created.http'))
     end
 
-    it 'builds the correct request' do
+    it 'builds the correct request with track' do
       attributes = { track: 125052 }
       subject.notify_skip("568bb450e13aa09d878b4568", attributes)
 
       expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/skips?key=key')
                           .with(body: attributes)
+    end
+
+    it 'builds the correct request with reference' do
+      attributes = { reference: 10266 }
+      subject.notify_skip("568bb450e13aa09d878b4568", attributes)
+
+      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/skips?key=key')
+                          .with(body: attributes)
+    end
+
+    it 'does not accept track and reference at the same time' do
+      attributes = { track: 125052, reference: 10266 }
+      expect { subject.notify_skip("568bb450e13aa09d878b4568", attributes) }.to raise_error(ArgumentError)
     end
 
     it 'returns the radio' do
@@ -187,12 +200,25 @@ describe Siilar::Client, '.radios' do
       stub_request(:post, %r[/2.0/radios/.+/likes]).to_return(read_fixture('radios/notify_like/created.http'))
     end
 
-    it 'builds the correct request' do
+    it 'builds the correct request with track' do
       attributes = { track: 125052 }
       subject.notify_like("568bb450e13aa09d878b4568", attributes)
 
       expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/likes?key=key')
                           .with(body: attributes)
+    end
+
+    it 'builds the correct request with reference' do
+      attributes = { reference: 10266 }
+      subject.notify_like("568bb450e13aa09d878b4568", attributes)
+
+      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/likes?key=key')
+                          .with(body: attributes)
+    end
+
+    it 'does not accept track and reference at the same time' do
+      attributes = { track: 125052, reference: 10266 }
+      expect { subject.notify_skip("568bb450e13aa09d878b4568", attributes) }.to raise_error(ArgumentError)
     end
 
     it 'returns the radio' do
@@ -209,12 +235,25 @@ describe Siilar::Client, '.radios' do
       stub_request(:post, %r[/2.0/radios/.+/dislikes]).to_return(read_fixture('radios/notify_dislike/created.http'))
     end
 
-    it 'builds the correct request' do
+    it 'builds the correct request with track' do
       attributes = { track: 125052 }
       subject.notify_dislike("568bb450e13aa09d878b4568", attributes)
 
       expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/dislikes?key=key')
                           .with(body: attributes)
+    end
+
+    it 'builds the correct request with reference' do
+      attributes = { reference: 10266 }
+      subject.notify_dislike("568bb450e13aa09d878b4568", attributes)
+
+      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/dislikes?key=key')
+                          .with(body: attributes)
+    end
+
+    it 'does not accept track and reference at the same time' do
+      attributes = { track: 125052, reference: 10266 }
+      expect { subject.notify_skip("568bb450e13aa09d878b4568", attributes) }.to raise_error(ArgumentError)
     end
 
     it 'returns the radio' do
@@ -231,12 +270,25 @@ describe Siilar::Client, '.radios' do
       stub_request(:post, %r[/2.0/radios/.+/bans]).to_return(read_fixture('radios/notify_ban/created.http'))
     end
 
-    it 'builds the correct request' do
+    it 'builds the correct request with track' do
       attributes = { track: 125052 }
       subject.notify_ban("568bb450e13aa09d878b4568", attributes)
 
       expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/bans?key=key')
                           .with(body: attributes)
+    end
+
+    it 'builds the correct request with reference' do
+      attributes = { reference: 10266 }
+      subject.notify_ban("568bb450e13aa09d878b4568", attributes)
+
+      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/bans?key=key')
+                          .with(body: attributes)
+    end
+
+    it 'does not accept track and reference at the same time' do
+      attributes = { track: 125052, reference: 10266 }
+      expect { subject.notify_skip("568bb450e13aa09d878b4568", attributes) }.to raise_error(ArgumentError)
     end
 
     it 'returns the radio' do
@@ -253,12 +305,25 @@ describe Siilar::Client, '.radios' do
       stub_request(:post, %r[/2.0/radios/.+/favorites]).to_return(read_fixture('radios/notify_favorite/created.http'))
     end
 
-    it 'builds the correct request' do
+    it 'builds the correct request with track' do
       attributes = { track: 125052 }
       subject.notify_favorite("568bb450e13aa09d878b4568", attributes)
 
       expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/favorites?key=key')
                           .with(body: attributes)
+    end
+
+    it 'builds the correct request with reference' do
+      attributes = { reference: 10266 }
+      subject.notify_favorite("568bb450e13aa09d878b4568", attributes)
+
+      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/favorites?key=key')
+                          .with(body: attributes)
+    end
+
+    it 'does not accept track and reference at the same time' do
+      attributes = { track: 125052, reference: 10266 }
+      expect { subject.notify_skip("568bb450e13aa09d878b4568", attributes) }.to raise_error(ArgumentError)
     end
 
     it 'returns the radio' do
@@ -275,12 +340,25 @@ describe Siilar::Client, '.radios' do
       stub_request(:post, %r[/2.0/radios/.+/notplayed]).to_return(read_fixture('radios/notify_not_played/created.http'))
     end
 
-    it 'builds the correct request' do
+    it 'builds the correct request with track' do
       attributes = { track: 125052 }
       subject.notify_not_played("568bb450e13aa09d878b4568", attributes)
 
       expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/notplayed?key=key')
                           .with(body: attributes)
+    end
+
+    it 'builds the correct request with reference' do
+      attributes = { reference: 10266 }
+      subject.notify_not_played("568bb450e13aa09d878b4568", attributes)
+
+      expect(WebMock).to have_requested(:post, 'http://api.niland/2.0/radios/568bb450e13aa09d878b4568/notplayed?key=key')
+                          .with(body: attributes)
+    end
+
+    it 'does not accept track and reference at the same time' do
+      attributes = { track: 125052, reference: 10266 }
+      expect { subject.notify_skip("568bb450e13aa09d878b4568", attributes) }.to raise_error(ArgumentError)
     end
 
     it 'returns the radio' do
