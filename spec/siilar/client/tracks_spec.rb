@@ -168,4 +168,24 @@ describe Siilar::Client, '.tracks' do
       expect(result.first.id).to be_a(Fixnum)
     end
   end
+
+  describe '#tags_from_reference' do
+    before do
+      stub_request(:get, %r[/2.0/tracks/reference/.+/tags]).to_return(read_fixture('tracks/track_tags/success.http'))
+    end
+
+    it 'builds the correct request' do
+      subject.tags_from_reference(100001)
+
+      expect(WebMock).to have_requested(:get, 'http://api.niland/2.0/tracks/reference/100001/tags?key=key')
+    end
+
+    it 'returns the tags' do
+      result = subject.tags_from_reference(100001)
+
+      expect(result).to be_an(Array)
+      expect(result.first).to be_a(Siilar::Struct::Tag)
+      expect(result.first.id).to be_a(Fixnum)
+    end
+  end
 end

@@ -94,6 +94,16 @@ module Siilar
 
         response.map { |tag| Struct::Tag.new(tag) }
       end
+
+
+      # Gets a track's tags from its internal reference.
+      #
+      # @see https://api.niland.io/2.0/doc/tracks#get-track-tags
+      def tags_from_reference(reference)
+        response = client.get("2.0/tracks/reference/#{reference}/tags")
+
+        response.map { |tag| Struct::Tag.new(tag) }
+      end
     end
   end
 end
