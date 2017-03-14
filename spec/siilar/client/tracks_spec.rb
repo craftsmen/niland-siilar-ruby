@@ -115,6 +115,34 @@ describe Siilar::Client, '.tracks' do
     end
   end
 
+  describe '#update_from_reference' do
+    before do
+      stub_request(:patch, %r[/2.0/tracks/reference/.+]).to_return(read_fixture('tracks/update/success.http'))
+    end
+
+    it 'builds the correct request' do
+      subject.update_from_reference(1, { title: 'Updated' })
+
+      expect(WebMock).to have_requested(:patch, 'http://api.niland/2.0/tracks/reference/1?key=key')
+                          .with(body: { title: 'Updated' })
+    end
+
+    it 'returns the track' do
+      result = subject.update_from_reference(1, {})
+
+      expect(result).to be_a(Siilar::Struct::Track)
+      expect(result.id).to be_a(Fixnum)
+    end
+
+    context 'when something does not exist' do
+      it 'raises NotFoundError' do
+        stub_request(:patch, %r[/2.0]).to_return(read_fixture('tracks/notfound.http'))
+
+        expect { subject.update_from_reference(1, {}) }.to raise_error(Siilar::NotFoundError)
+      end
+    end
+  end
+
   describe '#delete' do
     before do
       stub_request(:delete, %r[/2.0/tracks/1]).to_return(read_fixture("tracks/delete/success.http"))

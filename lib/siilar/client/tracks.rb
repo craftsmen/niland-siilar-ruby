@@ -64,6 +64,15 @@ module Siilar
         Struct::Track.new(response)
       end
 
+      # Updates a track from its reference.
+      #
+      # @see http://api.niland.io/2.0/doc/tracks#edit-a-track
+      def update_from_reference(reference, attributes = {})
+        response = client.patch("2.0/tracks/reference/#{reference}", attributes)
+
+        Struct::Track.new(response)
+      end
+
       # Updates a track audio file
       #
       # @see https://api.niland.io/2.0/doc/tracks#upload-a-temporary-track
