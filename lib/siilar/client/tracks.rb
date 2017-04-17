@@ -27,7 +27,7 @@ module Siilar
       def from_reference(reference)
         response = client.get("2.0/tracks/reference/#{reference}")
 
-        Struct::Track.new(response)
+        response.map { |r| Struct::Track.new(r) }
       end
 
       # Creates a track.
